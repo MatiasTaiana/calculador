@@ -1,0 +1,67 @@
+body{
+    background-image: url(istockphoto-876700382-612x612.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedor_form{
+    background-color: rgba(255, 0, 0, 0.616);
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px;
+}
+.titulo{
+   display: flex;
+   justify-content: center;
+   background-color: rgba(255, 0, 0, 0.616);
+   width: 40%;
+   font-size: larger;
+   margin-bottom: 20px;
+   h1{
+    text-align: center;
+   }
+}
+.porciones{
+    background-color:  rgba(255, 0, 0, 0.616);
+    width: 25%;
+    height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input{
+        text-align: center;
+        height: 17px;
+    }
+}
+.contenedor_ingrediente, .contenedor_peso_paquete, .contenedor_valor, .nombreIngrediente{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1%;
+    background-color: rgb(165, 42, 42);
+    input{
+        margin: 7px;
+    }
+    input::placeholder{
+        text-align: center;
+    }
+}
+
+#contenedorIngredientes{
+    width: 95%;
+}
+.contenedorBotones{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#botonCalcular, #botonDuplicar{
+    margin: 10px;
+    background-color: crimson;
+    width: 25%;
+    height: 50%;
+}

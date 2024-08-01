@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <header class="titulo">
+        <h1>Calculador de recetas</h1>
+    </header>
+    <div class="porciones">
+        <input type="number" name="porciones" id="porciones" placeholder="Cantidad de porciones">
+    </div>
+    <div id="contenedorIngredientes" >
+        <div id="ingrediente" class="contenedor_form">
+            <div class="nombreIngrediente">
+                <h2>Que ingrediente?</h2>
+                <label for="nombreIngrediente"></label>
+                <input type="text" name="nombreIngrediente" id="nombreIngrediente" placeholder="Harina">
+            </div>
+           <div class="contenedor_ingrediente">
+                 <h2>Ingrediente</h2>
+                 <label for="cantidad"></label>
+                 <input type="number" name="" id="" placeholder="Cantidad en gramos">
+            </div>
+            <div class="contenedor_peso_paquete">
+                 <h2>Peso del paquete</h2>
+                 <label for="peso"></label>
+                 <input type="number" name="" id="" placeholder="Peso en gramos">
+        </div>
+            <div class="contenedor_valor">
+                 <h2>Valor del paquete</h2>
+                 <label for="valor"></label>
+                 <input type="number" name="" id="" placeholder="Valor">
+            </div>
+        </div>
+    </div>
+    <div class="contenedorBotones">
+    <input id="botonDuplicar" type="button" value="Agregar ingrediente">
+    <input id="botonCalcular" type="button" value="Calcular">
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
