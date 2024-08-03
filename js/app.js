@@ -1,14 +1,4 @@
 console.log('prueba');
-document.getElementById('botonDuplicar').onclick = duplicate;
-
-let i = 0;
-let original = document.getElementById('ingrediente');
-
-function duplicate() {
-    let clone = original.cloneNode(true);
-    clone.id = 'ingrediente' + ++i;
-    document.getElementById('contenedorIngredientes').appendChild(clone);
-}
 
 function obtenerEntrada(promptMessage, isNumber = false) {
     let entrada;
