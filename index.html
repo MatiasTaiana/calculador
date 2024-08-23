@@ -10,8 +10,13 @@
     <header class="titulo">
         <h1>Calculador de recetas</h1>
     </header>
-    <div class="porciones">
-        <input type="number" name="porciones" id="porciones" placeholder="Cantidad de porciones">
+    <div class="inputsContainer">
+        <div class="nombreReceta">
+            <input type="text" name="nombreReceta" id="nombreReceta" placeholder="Nombre de la receta">
+        </div>
+        <div class="porciones">
+            <input type="number" name="porciones" id="porciones" placeholder="Cantidad de porciones">
+        </div>
     </div>
     <div id="contenedorIngredientes" >
         <div id="ingrediente" class="contenedor_form">
@@ -38,9 +43,22 @@
         </div>
     </div>
     <div class="contenedorBotones">
-    <input id="botonDuplicar" type="button" value="Agregar ingrediente">
-    <input id="botonCalcular" type="button" value="Calcular">
+        <input id="botonBorrarUltimo" type="button" value="Borrar último ingrediente">
+        <input id="botonDuplicar" type="button" value="Agregar ingrediente">
+        <input id="botonCalcular" type="button" value="Calcular">
     </div>
+
+    <!-- Div para mostrar el resultado -->
+    <div id="resultado" class="resultado"></div>
+
+    <!-- Botón para mostrar los resultados anteriores -->
+    <div class="contenedorBotonResultadosAnteriores">
+        <input id="botonResultadosAnteriores" type="button" value="Resultados anteriores">
+    </div>
+
+    <!-- Div para mostrar los resultados anteriores -->
+    <div id="resultadosAnteriores" class="resultadosAnteriores" style="display: none;"></div>
+
     <script src="js/app.js"></script>
 </body>
 </html>

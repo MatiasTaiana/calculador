@@ -25,7 +25,6 @@ body{
 }
 .porciones{
     background-color:  rgba(255, 0, 0, 0.616);
-    width: 25%;
     height:30px;
     display: flex;
     justify-content: center;
@@ -59,9 +58,82 @@ body{
     justify-content: center;
     align-items: center;
 }
-#botonCalcular, #botonDuplicar{
+
+.contenedorBotones input {
     margin: 10px;
     background-color: crimson;
     width: 25%;
     height: 50%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contenedorBotones input:hover {
+    background-color: darkred;
+}
+.inputsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nombreReceta, .porciones {
+    margin: 0 10px;
+    background-color: rgba(255, 0, 0, 0.616);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid crimson;
+    background-color: #fff5f5;
+    width: 50%;
+    text-align: center;
+    font-size: larger;
+    color: #333;
+    border-radius: 5px;
+}
+
+#botonResultadosAnteriores{
+    margin: 10px;
+    background-color: crimson;
+    width: 15%;
+    height: 35px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.contenedorBotonResultadosAnteriores {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultadosAnteriores {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    width: 50%;
+    text-align: center;
+    font-size: larger;
+    color: #333;
+    border-radius: 5px;
+}
+#resultadosAnteriores > div {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
