@@ -119,21 +119,35 @@ body{
     align-items: center;
 }
 
+/* Contenedor para resultados anteriores */
+/* Estilos del contenedor para resultados anteriores */
 .resultadosAnteriores {
     margin-top: 20px;
     padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    width: 50%;
-    text-align: center;
-    font-size: larger;
-    color: #333;
-    border-radius: 5px;
+    width: 100%;
+    display: flex;               /* Usa Flexbox para el diseño general */
+    flex-wrap: wrap;             /* Permite que las tarjetas se envuelvan en varias filas */
+    gap: 20px;                   /* Espacio entre las tarjetas */
+
+    box-sizing: border-box;
 }
+
+/* Estilos de las tarjetas dentro del contenedor de resultados anteriores */
 #resultadosAnteriores > div {
-    margin-bottom: 20px;
-    padding: 10px;
+    float: left;                /* Usa float para alinear las tarjetas horizontalmente */
+    width: calc(30% - 20px);    /* Ajusta el ancho de las tarjetas para permitir espacio entre ellas */
+    padding: 15px;
+    margin: 5px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;        /* Espacio en la parte inferior para el wrap */
+}
+
+/* Efecto hover para las tarjetas */
+#resultadosAnteriores > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
