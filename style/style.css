@@ -1,3 +1,5 @@
+*{font-family: "Barlow Condensed", sans-serif;}
+
 body{
     background-image: url(istockphoto-876700382-612x612.jpg);
     display: flex;
@@ -5,7 +7,9 @@ body{
     align-items: center;
 }
 .contenedor_form{
-    background-color: rgba(255, 0, 0, 0.616);
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     justify-content: center;
     display: flex;
     flex-direction: row;
@@ -15,31 +19,26 @@ body{
 .titulo{
    display: flex;
    justify-content: center;
-   background-color: rgba(255, 0, 0, 0.616);
+   background-color: white;
+   border: 1px solid #ddd;
    width: 40%;
    font-size: larger;
    margin-bottom: 20px;
+   border-radius: 5px;
    h1{
     text-align: center;
    }
 }
-.porciones{
-    background-color:  rgba(255, 0, 0, 0.616);
-    height:30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    input{
-        text-align: center;
-        height: 17px;
-    }
-}
 .contenedor_ingrediente, .contenedor_peso_paquete, .contenedor_valor, .nombreIngrediente{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     margin: 1%;
-    background-color: rgb(165, 42, 42);
+    text-align: center;
+    background-color: rgb(248, 245, 245);
+    border: 1px solid #ddd;
+    border-radius: 5px;
     input{
         margin: 7px;
     }
@@ -48,9 +47,6 @@ body{
     }
 }
 
-#contenedorIngredientes{
-    width: 95%;
-}
 .contenedorBotones{
     width: 100%;
     height: 100px;
@@ -61,7 +57,7 @@ body{
 
 .contenedorBotones input {
     margin: 10px;
-    background-color: crimson;
+    background-color: rgb(252, 65, 102);
     width: 25%;
     height: 50%;
     color: white;
@@ -82,17 +78,27 @@ body{
 }
 
 .nombreReceta, .porciones {
+    height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 10px;
-    background-color: rgba(255, 0, 0, 0.616);
+    background-color: white;
+    border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
+    input{
+        text-align: center;
+        height: 17px;
+    }
+
 }
 
 .resultado {
     margin-top: 20px;
     padding: 15px;
-    border: 1px solid crimson;
-    background-color: #fff5f5;
+    background-color: white;
+    border: 1px solid #ddd;
     width: 50%;
     text-align: center;
     font-size: larger;
@@ -102,14 +108,16 @@ body{
 
 #botonResultadosAnteriores{
     margin: 10px;
-    background-color: crimson;
-    width: 15%;
+    background-color: rgb(252, 65, 102);
     height: 35px;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+}
+#botonResultadosAnteriores:hover {
+    background-color: darkred;
 }
 .contenedorBotonResultadosAnteriores {
     margin-top: 20px;

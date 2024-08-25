@@ -30,6 +30,7 @@ function guardarResultado(nombreReceta, costoTotal, costoPorcion, ingredientes) 
     localStorage.setItem('resultados', JSON.stringify(resultados));
 }
 
+// Función para mostrar resultados anteriores
 function mostrarResultadosAnteriores() {
     const resultadosAnterioresDiv = document.getElementById('resultadosAnteriores');
     let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
@@ -56,27 +57,37 @@ function mostrarResultadosAnteriores() {
     } else {
         resultadosAnterioresDiv.innerHTML = '<p>No hay resultados anteriores.</p>';
     }
-
-    resultadosAnterioresDiv.style.display = 'block'; // Mostrar el div
 }
 
 // Función para mostrar detalles de los ingredientes
 function mostrarDetallesIngredientes(ingredientes, recetaDiv, botonDetalles) {
-    let detallesHTML = '<h4>Detalles de ingredientes:</h4>';
+    // Verifica si los detalles ya están visibles
+    const detallesVisible = recetaDiv.querySelector('.detallesIngredientes');
 
-    ingredientes.forEach(ingrediente => {
-        const costo = calcularCostoIngrediente(ingrediente.cantidad, ingrediente.pesoPaquete, ingrediente.valorPaquete);
-        detallesHTML += `
-            <p>Ingrediente: ${ingrediente.nombre}</p>
-            <p>Cantidad: ${ingrediente.cantidad}g</p>
-            <p>Costo: $${costo.toFixed(2)}</p>
-            <hr>
-        `;
-    });
+    if (detallesVisible) {
+        // Si los detalles ya están visibles, los elimina
+        detallesVisible.remove();
+        botonDetalles.textContent = 'Detalles'; // Cambia el texto del botón de nuevo a "Detalles"
+    } else {
+        // Si los detalles no están visibles, los muestra
+        let detallesHTML = '<div class="detallesIngredientes"><h4>Detalles de ingredientes:</h4>';
 
-    recetaDiv.innerHTML += detallesHTML;
-    botonDetalles.style.display = 'none'; // Ocultar botón después de mostrar detalles
+        ingredientes.forEach(ingrediente => {
+            const costo = calcularCostoIngrediente(ingrediente.cantidad, ingrediente.pesoPaquete, ingrediente.valorPaquete);
+            detallesHTML += `
+                <p>Ingrediente: ${ingrediente.nombre}</p>
+                <p>Cantidad: ${ingrediente.cantidad}g</p>
+                <p>Costo: $${costo.toFixed(2)}</p>
+                <hr>
+            `;
+        });
+
+        detallesHTML += '</div>';
+        recetaDiv.insertAdjacentHTML('beforeend', detallesHTML); // Usar insertAdjacentHTML para agregar detalles sin borrar otros elementos
+        botonDetalles.textContent = 'Ocultar detalles'; // Cambia el texto del botón a "Ocultar detalles"
+    }
 }
+
 
 // Event listener para el botón "Calcular"
 document.getElementById('botonCalcular').addEventListener('click', function() {
@@ -109,17 +120,19 @@ document.getElementById('botonCalcular').addEventListener('click', function() {
     guardarResultado(nombreReceta, costoTotal, costoPorcion, ingredientes);
 });
 
-
 // Event listener para el botón "Borrar último ingrediente"
 document.getElementById('botonBorrarUltimo').addEventListener('click', function() {
     const contenedorIngredientes = document.getElementById('contenedorIngredientes');
     const ingredientes = contenedorIngredientes.querySelectorAll('.contenedor_form');
 
-    if (ingredientes.length > 0) {
+    if (ingredientes.length > 1) {  // Verifica que haya más de un ingrediente antes de borrar
         // Elimina el último ingrediente en la lista
         contenedorIngredientes.removeChild(ingredientes[ingredientes.length - 1]);
+    } else {
+        alert('No puedes eliminar el ingrediente original.');
     }
 });
+
 
 // Event listener para el botón "Agregar ingrediente"
 document.getElementById('botonDuplicar').addEventListener('click', function() {
@@ -142,73 +155,15 @@ document.getElementById('botonDuplicar').addEventListener('click', function() {
 
 // Event listener para el botón "Resultados anteriores"
 document.getElementById('botonResultadosAnteriores').addEventListener('click', function() {
-    mostrarResultadosAnteriores();
+    const resultadosAnterioresDiv = document.getElementById('resultadosAnteriores');
+
+    if (resultadosAnterioresDiv.style.display === 'none' || resultadosAnterioresDiv.style.display === '') {
+        mostrarResultadosAnteriores();  // Llenar contenido solo si se va a mostrar
+        resultadosAnterioresDiv.style.display = 'block';
+    } else {
+        resultadosAnterioresDiv.style.display = 'none';
+    }
 });
 
 
-
-// function obtenerEntrada(promptMessage, isNumber = false) {
-//     let entrada;
-//     do {
-//         entrada = prompt(promptMessage);
-//         if (entrada === null) {
-//             alert('Operación cancelada por el usuario.');
-//             throw new Error('Operación cancelada por el usuario.');
-//         }
-//         if (isNumber) {
-//             entrada = parseFloat(entrada);
-//             if (isNaN(entrada) || entrada <= 0) {
-//                 alert('Debe ingresar un número válido mayor que 0.');
-//                 entrada = null;
-//             }
-//         } else {
-//             if (!entrada.trim()) {
-//                 alert('Debe ingresar un texto válido.');
-//                 entrada = null;
-//             }
-//         }
-//     } while (entrada === null);
-//     return entrada;
-// }
-
-// let nombreReceta = obtenerEntrada('¿Qué vas a cocinar?');
-// let porciones = obtenerEntrada('¿Para cuántas porciones va a ser esta receta?', true);
-// let ingredientes = [];
-
-// do {
-//     let nombreIngrediente = obtenerEntrada('¿Qué ingrediente vas a usar?');
-//     let cantidad = obtenerEntrada('¿Qué cantidad vas a usar?', true);
-//     let pesoPaquete = obtenerEntrada('¿Cuánto pesaba el paquete?', true);
-//     let valorPaquete = obtenerEntrada('¿Cuál era el valor del paquete?', true);
-    
-//     function reglaDeTres(cantidad, pesoPaquete, valorPaquete) {
-//         return (valorPaquete / pesoPaquete) * cantidad;
-//     }
-    
-//     let costo = reglaDeTres(cantidad, pesoPaquete, valorPaquete);
-//     ingredientes.push({ nombre: nombreIngrediente, cantidad: cantidad, costo: costo });
-
-// } while (confirm('¿Quieres agregar otro ingrediente?'));
-
-// function sumarCostos(ingredientes) {
-//     let totalCosto = 0;
-//     for (let i = 0; i < ingredientes.length; i++) {
-//         totalCosto += ingredientes[i].costo;
-//     }
-//     return totalCosto;
-// }
-
-// let costoTotal = sumarCostos(ingredientes);
-
-// ingredientes.forEach(ingrediente => {
-//     console.log(`Ingrediente: ${ingrediente.nombre}, Cantidad: ${ingrediente.cantidad}, Costo: $${ingrediente.costo.toFixed(2)}`);
-// });
-
-// function divisionCostoPorcion(costoTotal, porciones) {
-//     return costoTotal / porciones;
-// }
-
-// let costoPorcion = divisionCostoPorcion(costoTotal, porciones);
-// alert(`Costo total de ${nombreReceta} es de $${costoTotal.toFixed(2)}`);
-// alert(`El costo de cada porción es de $${costoPorcion.toFixed(2)}`);
 
