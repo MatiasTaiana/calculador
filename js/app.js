@@ -1,5 +1,9 @@
 // Función para calcular el costo de un ingrediente
-function calcularCostoIngrediente(cantidad, pesoPaquete, valorPaquete) {
+function calcularCostoIngrediente(cantidad, pesoPaquete, valorPaquete, esPorGramo) {
+    // Si la cantidad está en unidades, el costo se calcula de manera diferente
+    if (!esPorGramo) {
+        return (valorPaquete / pesoPaquete) * cantidad;
+    }
     return (valorPaquete / pesoPaquete) * cantidad;
 }
 
@@ -13,9 +17,16 @@ function calcularCostoTotal() {
         const cantidad = parseFloat(ingrediente.querySelector('[placeholder="Gramos o unidades"]').value);
         const pesoPaquete = parseFloat(ingrediente.querySelectorAll('[placeholder="Gramos o unidades"]')[1].value);
         const valorPaquete = parseFloat(ingrediente.querySelector('[placeholder="$$$"]').value);
+        
+        // Verificar las unidades seleccionadas
+        const unidadCantidad = ingrediente.querySelectorAll('.unit-select')[0].value; // 'gramos' o 'unidades'
+        const unidadPesoPaquete = ingrediente.querySelectorAll('.unit-select')[1].value; // 'gramos' o 'unidades'
+
+        // Si alguna de las unidades es 'unidades', ajustamos la lógica del cálculo
+        const esPorGramo = unidadCantidad === 'gramos' && unidadPesoPaquete === 'gramos';
 
         if (!isNaN(cantidad) && !isNaN(pesoPaquete) && !isNaN(valorPaquete) && cantidad > 0 && pesoPaquete > 0 && valorPaquete > 0) {
-            const costo = calcularCostoIngrediente(cantidad, pesoPaquete, valorPaquete);
+            const costo = calcularCostoIngrediente(cantidad, pesoPaquete, valorPaquete, esPorGramo);
             costoTotal += costo;
         }
     });
@@ -68,14 +79,14 @@ function mostrarDetallesIngredientes(ingredientes, recetaDiv, botonDetalles) {
         detallesVisible.remove();
         botonDetalles.textContent = 'Detalles'; // Cambia el texto del botón de nuevo a "Detalles"
     } else {
-        // Si los detalles no están visibles, los muestra
         let detallesHTML = '<div class="detallesIngredientes"><h4>Detalles de ingredientes:</h4>';
 
         ingredientes.forEach(ingrediente => {
-            const costo = calcularCostoIngrediente(ingrediente.cantidad, ingrediente.pesoPaquete, ingrediente.valorPaquete);
+            // Mostrar correctamente la cantidad y las unidades
+            const costo = calcularCostoIngrediente(ingrediente.cantidad, ingrediente.pesoPaquete, ingrediente.valorPaquete, ingrediente.esPorGramo);
             detallesHTML += `
                 <p>Ingrediente: ${ingrediente.nombre}</p>
-                <p>Cantidad: ${ingrediente.cantidad}g</p>
+                <p>Cantidad: ${ingrediente.cantidad} ${ingrediente.unidadCantidad}</p>
                 <p>Costo: $${costo.toFixed(2)}</p>
                 <hr>
             `;
@@ -86,7 +97,6 @@ function mostrarDetallesIngredientes(ingredientes, recetaDiv, botonDetalles) {
         botonDetalles.textContent = 'Ocultar detalles'; // Cambia el texto del botón a "Ocultar detalles"
     }
 }
-
 
 // Event listener para el botón "Calcular"
 document.getElementById('botonCalcular').addEventListener('click', function() {
@@ -112,12 +122,16 @@ document.getElementById('botonCalcular').addEventListener('click', function() {
         const cantidad = parseFloat(ingrediente.querySelector('[placeholder="Gramos o unidades"]').value);
         const pesoPaquete = parseFloat(ingrediente.querySelectorAll('[placeholder="Gramos o unidades"]')[1].value);
         const valorPaquete = parseFloat(ingrediente.querySelector('[placeholder="$$$"]').value);
+        const unidadCantidad = ingrediente.querySelectorAll('.unit-select')[0].value;
+        const unidadPesoPaquete = ingrediente.querySelectorAll('.unit-select')[1].value;
+        const esPorGramo = unidadCantidad === 'gramos' && unidadPesoPaquete === 'gramos';
 
-        return { nombre, cantidad, pesoPaquete, valorPaquete };
+        return { nombre, cantidad, pesoPaquete, valorPaquete, unidadCantidad, unidadPesoPaquete, esPorGramo };
     });
 
     guardarResultado(nombreReceta, costoTotal, costoPorcion, ingredientes);
 });
+
 
 // Event listener para el botón "Borrar último ingrediente"
 document.getElementById('botonBorrarUltimo').addEventListener('click', function() {
