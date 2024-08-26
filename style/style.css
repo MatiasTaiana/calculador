@@ -133,17 +133,16 @@ body{
     margin-top: 20px;
     padding: 15px;
     width: 100%;
-    display: flex;               /* Usa Flexbox para el diseño general */
-    flex-wrap: wrap;             /* Permite que las tarjetas se envuelvan en varias filas */
-    gap: 20px;                   /* Espacio entre las tarjetas */
-
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;      
     box-sizing: border-box;
 }
 
 /* Estilos de las tarjetas dentro del contenedor de resultados anteriores */
 #resultadosAnteriores > div {
-    float: left;                /* Usa float para alinear las tarjetas horizontalmente */
-    width: calc(30% - 20px);    /* Ajusta el ancho de las tarjetas para permitir espacio entre ellas */
+    float: left;
+    width: calc(30% - 20px);    
     padding: 15px;
     margin: 5px;
     border: 1px solid #ddd;
@@ -151,7 +150,7 @@ body{
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 20px;        /* Espacio en la parte inferior para el wrap */
+    margin-bottom: 20px;
 }
 
 /* Efecto hover para las tarjetas */

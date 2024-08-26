@@ -45,7 +45,6 @@ function mostrarResultadosAnteriores() {
                 <p><strong>Costo total:</strong> $${resultado.costoTotal.toFixed(2)}</p>
                 <p><strong>Costo por porción:</strong> $${resultado.costoPorcion.toFixed(2)}</p>
                 <button id="detalles-${index}">Detalles</button>
-                <hr>
             `;
             resultadosAnterioresDiv.appendChild(recetaDiv);
 
