@@ -171,6 +171,18 @@ h1{
     }
 }
 
+.botonDarkMode{
+    margin-bottom: 15px;
+    background-color: rgb(252, 65, 102);
+    border-radius: 5px;
+    border-style: none;
+    color: #ffffff;
+    width: 120px;
+    height: 30px;
+}
+.botonDarkMode:hover{
+    background-color: darkred;
+}
 /* Estilos para el modo oscuro */
 .dark-mode .contenedor_form, 
 .dark-mode .titulo, 
@@ -181,7 +193,8 @@ h1{
 .dark-mode .resultado,
 .dark-mode .resultadoAnterior,
 .dark-mode .inputsContainer,
-.dark-mode .botonResultadosAnteriores {
+.dark-mode .botonResultadosAnteriores,
+.dark-mode .botonDarkMode {
     background-color: #1e1e1e;
     color: #ffffff;
 }
@@ -195,4 +208,7 @@ h1{
 
 .dark-mode input[type="button"]:hover {
     background-color: #555555;
+}
+.dark-mode .botonDarkMode:hover{
+    background-color: #555555;  
 }
