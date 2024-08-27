@@ -129,29 +129,16 @@ h1{
 #botonResultadosAnteriores:hover {
     background-color: darkred;
 }
-.contenedorBotonResultadosAnteriores {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 /* Contenedor para resultados anteriores */
 /* Estilos del contenedor para resultados anteriores */
-.resultadosAnteriores {
-    margin-top: 20px;
-    padding: 15px;
+/* Estilos de las tarjetas dentro del contenedor de resultados anteriores */
+.resultadosAnteriores{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;      
-    box-sizing: border-box;
-
 }
 
-/* Estilos de las tarjetas dentro del contenedor de resultados anteriores */
-#resultadosAnteriores > div {
+.resultadoAnterior{
     float: left;
     width: calc(30% - 20px);    
     padding: 15px;
@@ -167,12 +154,21 @@ h1{
 }
 
 /* Efecto hover para las tarjetas */
-#resultadosAnteriores > div:hover {
+.resultadoAnterior:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-p{
-   font-size: larger;
+.resultadoAnterior{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5px;
+        font-size: larger;
+    }
 }
-   
+
 

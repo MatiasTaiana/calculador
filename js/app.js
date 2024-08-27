@@ -51,6 +51,8 @@ function mostrarResultadosAnteriores() {
     if (resultados.length > 0) {
         resultados.forEach((resultado, index) => {
             const recetaDiv = document.createElement('div');
+            recetaDiv.classList.add('resultadoAnterior');  // Asigna la clase 'resultadoAnterior' al div
+            
             recetaDiv.innerHTML = `
                 <p><strong>Nombre de la receta:</strong> ${resultado.nombreReceta}</p>
                 <p><strong>Costo total:</strong> $${resultado.costoTotal.toFixed(2)}</p>
