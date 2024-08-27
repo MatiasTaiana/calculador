@@ -179,6 +179,23 @@ document.getElementById('botonResultadosAnteriores').addEventListener('click', f
         resultadosAnterioresDiv.style.display = 'none';
     }
 });
+document.getElementById('toggleDarkMode').addEventListener('click', function () {
+    // Alterna la clase 'dark-mode' en el elemento body
+    document.body.classList.toggle('dark-mode');
+    
+    // Guardar la preferencia del usuario en el Local Storage
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('dark-mode', 'enabled');
+    } else {
+        localStorage.setItem('dark-mode', 'disabled');
+    }
+});
 
+// Al cargar la página, verifica la preferencia guardada del usuario
+window.onload = function () {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+};
 
 
