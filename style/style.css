@@ -33,7 +33,18 @@ h1{
     justify-content: space-around;
     margin: 10px;
 }
-
+#contenedorIngredientes{
+  width: 730px;
+}
+@media screen and (max-width:730px){
+    #contenedorIngredientes{
+        width: 100%;
+      }
+      .contenedor_form{
+        flex-wrap: wrap;
+      }
+    
+}
 .contenedor_ingrediente, .contenedor_peso_paquete, .contenedor_valor, .nombreIngrediente{
     display: flex;
     flex-wrap: wrap;
