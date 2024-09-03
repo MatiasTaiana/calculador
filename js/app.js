@@ -6,18 +6,39 @@ function calcularCostoIngrediente(cantidad, pesoPaquete, valorPaquete, esPorGram
     }
     return (valorPaquete / pesoPaquete) * cantidad;
 }
-
+function hayCamposVacios(ingredientes) {
+    return ingredientes.some(ing => {
+        return !ing.nombre || !ing.cantidad || !ing.pesoPaquete || !ing.valorPaquete || !ing.unidadCantidad || !ing.unidadPesoPaquete;
+    });
+}
 // Función para calcular el costo total de los ingredientes
 function calcularCostoTotal() {
     const porciones = parseFloat(document.getElementById('porciones').value);
     const ingredientes = document.querySelectorAll('#contenedorIngredientes .contenedor_form');
     let costoTotal = 0;
 
+    // Validación de campos vacíos
+    for (let i = 0; i < ingredientes.length; i++) {
+        const ingrediente = ingredientes[i];
+        const cantidad = ingrediente.querySelector('[placeholder="Gramos o unidades"]').value;
+        const pesoPaquete = ingrediente.querySelectorAll('[placeholder="Gramos o unidades"]')[1].value;
+        const valorPaquete = ingrediente.querySelector('[placeholder="$$$"]').value;
+        const unidadCantidad = ingrediente.querySelectorAll('.unit-select')[0].value;
+        const unidadPesoPaquete = ingrediente.querySelectorAll('.unit-select')[1].value;
+
+        // Verificar si alguno de los campos está vacío o es inválido
+        if (!cantidad || !pesoPaquete || !valorPaquete || !unidadCantidad || !unidadPesoPaquete) {
+            alert('Por favor, completa todos los campos antes de calcular.');
+            return; // Detener la ejecución si hay campos vacíos
+        }
+    }
+
+    // Cálculo del costo total
     ingredientes.forEach(ingrediente => {
         const cantidad = parseFloat(ingrediente.querySelector('[placeholder="Gramos o unidades"]').value);
         const pesoPaquete = parseFloat(ingrediente.querySelectorAll('[placeholder="Gramos o unidades"]')[1].value);
         const valorPaquete = parseFloat(ingrediente.querySelector('[placeholder="$$$"]').value);
-        
+
         // Verificar las unidades seleccionadas
         const unidadCantidad = ingrediente.querySelectorAll('.unit-select')[0].value; // 'gramos' o 'unidades'
         const unidadPesoPaquete = ingrediente.querySelectorAll('.unit-select')[1].value; // 'gramos' o 'unidades'
@@ -34,13 +55,53 @@ function calcularCostoTotal() {
     return { costoTotal, porciones };
 }
 
+// Función para comparar dos listas de ingredientes
+function sonIngredientesIguales(ingredientes1, ingredientes2) {
+    if (ingredientes1.length !== ingredientes2.length) return false;
+    
+    return ingredientes1.every((ing1, index) => {
+        const ing2 = ingredientes2[index];
+        return ing1.nombre === ing2.nombre &&
+               ing1.cantidad === ing2.cantidad &&
+               ing1.pesoPaquete === ing2.pesoPaquete &&
+               ing1.valorPaquete === ing2.valorPaquete &&
+               ing1.unidadCantidad === ing2.unidadCantidad &&
+               ing1.unidadPesoPaquete === ing2.unidadPesoPaquete;
+    });
+}
+
 // Función para guardar los resultados en el Local Storage
 function guardarResultado(nombreReceta, costoTotal, costoPorcion, ingredientes) {
     let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
+
+    // Verificar si la receta ya existe
+    const recetaExistente = resultados.find(resultado => 
+        resultado.nombreReceta === nombreReceta && 
+        sonIngredientesIguales(resultado.ingredientes, ingredientes)
+    );
+
+    if (recetaExistente) {
+        alert('Esta receta ya fue calculada con los mismos ingredientes y cantidades.');
+        return;  // Detiene la ejecución si la receta ya existe
+    }
+
+    // Si no existe, guardar el nuevo resultado
     resultados.push({ nombreReceta, costoTotal, costoPorcion, ingredientes });
     localStorage.setItem('resultados', JSON.stringify(resultados));
 }
-
+// Función para borrar una receta del Local Storage y actualizar la vista
+function borrarReceta(index) {
+    let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
+    
+    // Elimina la receta del array de resultados
+    resultados.splice(index, 1);
+    
+    // Guarda el array actualizado en el Local Storage
+    localStorage.setItem('resultados', JSON.stringify(resultados));
+    
+    // Actualiza la vista
+    mostrarResultadosAnteriores();
+}
 // Función para mostrar resultados anteriores
 function mostrarResultadosAnteriores() {
     const resultadosAnterioresDiv = document.getElementById('resultadosAnteriores');
@@ -57,13 +118,18 @@ function mostrarResultadosAnteriores() {
                 <p><strong>Nombre de la receta:</strong> ${resultado.nombreReceta}</p>
                 <p><strong>Costo total:</strong> $${resultado.costoTotal.toFixed(2)}</p>
                 <p><strong>Costo por porción:</strong> $${resultado.costoPorcion.toFixed(2)}</p>
-                <button id="detalles-${index}">Detalles</button>
+                <button class="botonReceta" id="detalles-${index}">Detalles</button>
+                <button class="botonReceta" id="borrar-${index}">Borrar receta</button>
             `;
             resultadosAnterioresDiv.appendChild(recetaDiv);
 
             // Añadir event listener al botón de detalles
             document.getElementById(`detalles-${index}`).addEventListener('click', function() {
                 mostrarDetallesIngredientes(resultado.ingredientes, recetaDiv, this);
+            });
+            // Añadir event listener al botón de borrar receta
+            document.getElementById(`borrar-${index}`).addEventListener('click', function() {
+                borrarReceta(index);
             });
         });
     } else {
