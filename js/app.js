@@ -31,14 +31,10 @@ function calcularCostoTotal() {
             Toastify({
 
                 text: "Por favor completa todos los campos",
-                
+                position: "center",
                 duration: 5000,
                 style: {
                     background: "#ff0000",
-                  },
-                  offset: {
-                    x: 100, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-                    y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
                   },
                 }).showToast();;
             return; // Detener la ejecución si hay campos vacíos
@@ -93,7 +89,15 @@ function guardarResultado(nombreReceta, costoTotal, costoPorcion, ingredientes) 
     );
 
     if (recetaExistente) {
-        alert('Esta receta ya fue calculada con los mismos ingredientes y cantidades.');
+        Toastify({
+        text: "Esta receta ya fue calculada con los mismos ingredientes y cantidades.",
+        position: "center",
+        duration: 5000,
+        style: {
+            background: "#ff0000",
+          },
+        }).showToast();
+        
         return;  // Detiene la ejecución si la receta ya existe
     }
 
@@ -115,28 +119,49 @@ function borrarReceta(index) {
     mostrarResultadosAnteriores();
 }
 // Función para cotizar el costo en dólares
-function cotizarEnDolares(index) {
-    fetch("https://dolarapi.com/v1/dolares/blue")
-        .then(response => response.json())
-        .then(data => {
-            const valorDolar = parseFloat(data.venta);
-            let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
-            const resultado = resultados[index];
+// Función para cotizar el costo en dólares
+async function cotizarEnDolares(index) {
+    try {
+        const response = await fetch("https://dolarapi.com/v1/dolares/blue");
+        if (!response.ok) {
+            throw new Error('Error al obtener el valor del dólar.');
+        }
+        const data = await response.json();
+        const valorDolar = parseFloat(data.venta);
+        
+        let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
+        const resultado = resultados[index];
 
-            if (!isNaN(valorDolar)) {
-                const costoTotalDolares = resultado.costoTotal / valorDolar;
-                const costoPorcionDolares = resultado.costoPorcion / valorDolar;
+        if (!isNaN(valorDolar)) {
+            const costoTotalDolares = resultado.costoTotal / valorDolar;
+            const costoPorcionDolares = resultado.costoPorcion / valorDolar;
 
-                alert(`Costo total en dólares: $${costoTotalDolares.toFixed(2)}\nCosto por porción en dólares: $${costoPorcionDolares.toFixed(2)}`);
-            } else {
-                alert('No se pudo obtener el valor del dólar.');
-            }
-        })
-        .catch(error => {
-            console.error('Error al obtener el valor del dólar:', error);
-            alert('Hubo un error al intentar obtener el valor del dólar.');
-        });
+            Toastify({
+                text: `Costo total en dólares: $${costoTotalDolares.toFixed(2)}\nCosto por porción en dólares: $${costoPorcionDolares.toFixed(2)}`,
+                position: "center",
+                duration: 10000,
+                style: {
+                    background: "#ff0000",
+                  },
+                close: true
+            }).showToast();
+        } else {
+            throw new Error('El valor del dólar no es válido.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        Toastify({
+            text: 'Hubo un error al intentar obtener el valor del dólar.',
+            duration: 5000,
+            style: {
+                background: "#ff0000",
+              },
+            close: true
+        }).showToast();
+    }
 }
+
+
 
 // Función para mostrar resultados anteriores
 function mostrarResultadosAnteriores() {
@@ -250,7 +275,14 @@ document.getElementById('botonBorrarUltimo').addEventListener('click', function(
         // Elimina el último ingrediente en la lista
         contenedorIngredientes.removeChild(ingredientes[ingredientes.length - 1]);
     } else {
-        alert('No puedes eliminar el ingrediente original.');
+        Toastify({
+            text: 'No puedes eliminar el ingrediente original.',
+            position: "center",
+            duration: 5000,
+            style: {
+                background: "#ff0000",
+              },
+            }).showToast();
     }
 });
 
