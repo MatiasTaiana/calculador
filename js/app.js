@@ -28,7 +28,19 @@ function calcularCostoTotal() {
 
         // Verificar si alguno de los campos está vacío o es inválido
         if (!cantidad || !pesoPaquete || !valorPaquete || !unidadCantidad || !unidadPesoPaquete) {
-            alert('Por favor, completa todos los campos antes de calcular.');
+            Toastify({
+
+                text: "Por favor completa todos los campos",
+                
+                duration: 5000,
+                style: {
+                    background: "#ff0000",
+                  },
+                  offset: {
+                    x: 100, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+                    y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+                  },
+                }).showToast();;
             return; // Detener la ejecución si hay campos vacíos
         }
     }
