@@ -102,6 +102,30 @@ function borrarReceta(index) {
     // Actualiza la vista
     mostrarResultadosAnteriores();
 }
+// Función para cotizar el costo en dólares
+function cotizarEnDolares(index) {
+    fetch("https://dolarapi.com/v1/dolares/blue")
+        .then(response => response.json())
+        .then(data => {
+            const valorDolar = parseFloat(data.venta);
+            let resultados = JSON.parse(localStorage.getItem('resultados')) || [];
+            const resultado = resultados[index];
+
+            if (!isNaN(valorDolar)) {
+                const costoTotalDolares = resultado.costoTotal / valorDolar;
+                const costoPorcionDolares = resultado.costoPorcion / valorDolar;
+
+                alert(`Costo total en dólares: $${costoTotalDolares.toFixed(2)}\nCosto por porción en dólares: $${costoPorcionDolares.toFixed(2)}`);
+            } else {
+                alert('No se pudo obtener el valor del dólar.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener el valor del dólar:', error);
+            alert('Hubo un error al intentar obtener el valor del dólar.');
+        });
+}
+
 // Función para mostrar resultados anteriores
 function mostrarResultadosAnteriores() {
     const resultadosAnterioresDiv = document.getElementById('resultadosAnteriores');
@@ -120,6 +144,7 @@ function mostrarResultadosAnteriores() {
                 <p><strong>Costo por porción:</strong> $${resultado.costoPorcion.toFixed(2)}</p>
                 <button class="botonReceta" id="detalles-${index}">Detalles</button>
                 <button class="botonReceta" id="borrar-${index}">Borrar receta</button>
+                <button class="botonReceta" id="dolar-${index}">Cotizar en dolares</button>
             `;
             resultadosAnterioresDiv.appendChild(recetaDiv);
 
@@ -130,6 +155,9 @@ function mostrarResultadosAnteriores() {
             // Añadir event listener al botón de borrar receta
             document.getElementById(`borrar-${index}`).addEventListener('click', function() {
                 borrarReceta(index);
+            });
+            document.getElementById(`dolar-${index}`).addEventListener('click', function() {
+                cotizarEnDolares(index);
             });
         });
     } else {
