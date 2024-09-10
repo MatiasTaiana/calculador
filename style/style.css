@@ -53,11 +53,9 @@ h1{
         padding: 0px;
         margin: 7px 0px;
     }
-    /* .selectorUnidades{
-        position: relative;
-        bottom: 27px;
-        left: 77px;
-    } */
+     .selectorUnidades{
+        margin-bottom: 6px;
+    } 
     input::placeholder{
         text-align: center;
     }
@@ -233,7 +231,7 @@ h1{
 }
 @media screen and (max-width:730px){
     h2{
-        font-size: 10px;
+        font-size: 15px;
     }
     .input{
         width: 50px;
@@ -244,5 +242,13 @@ h1{
       .contenedorForm{
         flex-wrap: wrap;
       }
-    
+    .contenedorForm{
+        div{
+            width: 20%;
+            margin: 3px 0px;
+            h2{
+                overflow-wrap: break-word;
+            }
+        }
+    }
 }
