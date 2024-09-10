@@ -14,7 +14,7 @@
     <header class="titulo">
         <h1>Calculador de recetas</h1>
     </header>
-    <button class="botonDarkMode" id="toggleDarkMode">Toggle Dark Mode</button>
+    <button class="botonDarkMode" id="activarDarkMode">Toggle Dark Mode</button>
 
     <div class="inputsContainer">
         <div class="nombreReceta">
@@ -25,31 +25,31 @@
         </div>
     </div>
     <div id="contenedorIngredientes" >
-        <div id="ingrediente" class="contenedor_form">
+        <div id="ingrediente" class="contenedorForm">
             <div class="nombreIngrediente">
                 <h2>Que ingrediente?</h2>
                 <label for="nombreIngrediente"></label>
                 <input class="input" type="text" name="nombreIngrediente" id="nombreIngrediente" placeholder="Harina">
             </div>
-           <div class="contenedor_ingrediente">
+           <div class="contenedorIngrediente">
                  <h2>Cuanto del ingrediente?</h2>
                  <label for="cantidad"></label>
                  <input class="input" type="number" name="" id="" placeholder="Gramos o unidades">
-                 <select class="unit-select">
+                 <select class="selectorUnidades">
                     <option value="gramos">gr</option>
                     <option value="unidades">u</option>
                 </select>
             </div>
-            <div class="contenedor_peso_paquete">
+            <div class="contenedorPesoPaquete">
                  <h2>Cantidad del paquete</h2>
                  <label for="peso"></label>
                  <input class="input" type="number" name="" id="" placeholder="Gramos o unidades">
-                 <select class="unit-select">
+                 <select class="selectorUnidades">
                     <option value="gramos">gr</option>
                     <option value="unidades">u</option>
                 </select>
         </div>
-            <div class="contenedor_valor">
+            <div class="contenedorValor">
                  <h2>Valor del paquete</h2>
                  <label for="valor"></label>
                  <input class="input" type="number" name="" id="" placeholder="$$$">
@@ -61,18 +61,14 @@
         <input id="botonDuplicar" type="button" value="Agregar ingrediente">
         <input id="botonCalcular" type="button" value="Calcular">
     </div>
-
-    <!-- Div para mostrar el resultado -->
     <div id="resultado" class="resultado"></div>
-
-    <!-- Botón para mostrar los resultados anteriores -->
     <div class="contenedorBotonResultadosAnteriores">
         <input class="botonResultadosAnteriores" id="botonResultadosAnteriores" type="button" value="Resultados anteriores">
     </div>
-
-    <!-- Div para mostrar los resultados anteriores -->
     <div id="resultadosAnteriores" class="resultadosAnteriores" style="display: none;"></div>
+    <input id="botonBorrarTodos" type="button" value="Borrar todos las recetas anteriores">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

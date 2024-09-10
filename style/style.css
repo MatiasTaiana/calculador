@@ -23,7 +23,7 @@ h1{
     padding: 0px 50px;
 }
 
-.contenedor_form{
+.contenedorForm{
     background-color: rgba(255, 255, 255, 0.014);
     backdrop-filter: blur(3px);
     border: 1px solid #ddd;
@@ -37,22 +37,8 @@ h1{
 #contenedorIngredientes{
   width: 730px;
 }
-@media screen and (max-width:730px){
-    h2{
-        font-size: 10px;
-    }
-    .input{
-        width: 50px;
-    }
-    #contenedorIngredientes{
-        width: 100%;
-      }
-      .contenedor_form{
-        flex-wrap: wrap;
-      }
-    
-}
-.contenedor_ingrediente, .contenedor_peso_paquete, .contenedor_valor, .nombreIngrediente{
+
+.contenedorIngrediente, .contenedorPesoPaquete, .contenedorValor, .nombreIngrediente{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -64,8 +50,14 @@ h1{
     border: 1px solid #ddd;
     border-radius: 5px;
     input{
-        margin: 7px;
+        padding: 0px;
+        margin: 7px 0px;
     }
+    /* .selectorUnidades{
+        position: relative;
+        bottom: 27px;
+        left: 77px;
+    } */
     input::placeholder{
         text-align: center;
     }
@@ -90,8 +82,17 @@ h1{
     cursor: pointer;
     font-size: 16px;
 }
-
-.contenedorBotones input:hover {
+#botonBorrarTodos{
+    margin: 10px;
+    background-color: rgb(252, 65, 102);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+    padding: 8px;
+}
+.contenedorBotones input:hover, #botonBorrarTodos:hover {
     background-color: darkred;
 }
 .inputsContainer {
@@ -147,11 +148,6 @@ h1{
 .botonResultadosAnteriores:hover {
     background-color: darkred;
 }
-
-
-/* Contenedor para resultados anteriores */
-/* Estilos del contenedor para resultados anteriores */
-/* Estilos de las tarjetas dentro del contenedor de resultados anteriores */
 .resultadosAnteriores{
     width: 100%;
 }
@@ -202,36 +198,51 @@ h1{
     background-color: darkred;
 }
 /* Estilos para el modo oscuro */
-.dark-mode .contenedor_form, 
-.dark-mode .titulo, 
-.dark-mode .contenedor_ingrediente, 
-.dark-mode .contenedor_peso_paquete, 
-.dark-mode .contenedor_valor, 
-.dark-mode .nombreIngrediente,
-.dark-mode .resultado,
-.dark-mode .resultadoAnterior,
-.dark-mode .inputsContainer,
-.dark-mode .botonResultadosAnteriores,
-.dark-mode .botonDarkMode {
+.darkMode .contenedorForm, 
+.darkMode .titulo, 
+.darkMode .contenedorIngrediente, 
+.darkMode .contenedorPesoPaquete, 
+.darkMode .contenedorValor, 
+.darkMode .nombreIngrediente,
+.darkMode .resultado,
+.darkMode .resultadoAnterior,
+.darkMode .inputsContainer,
+.darkMode .botonResultadosAnteriores,
+.darkMode .botonDarkMode {
     background-color: #1e1e1e;
     color: #ffffff;
 }
 
-.dark-mode {
+.darkMode {
     background-image: url('image.jpg');
 }
-.dark-mode input[type="button"], .dark-mode .unit-select {
+.darkMode input[type="button"], .darkMode .selectorUnidades, .darkMode #botonBorrarTodos {
     background-color: #333333;
     color: #ffffff;
 }
 
-.dark-mode input[type="button"]:hover {
+.darkMode input[type="button"]:hover {
     background-color: #555555;
 }
-.dark-mode .botonDarkMode:hover{
+.darkMode .botonDarkMode:hover, #botonBorrarTodos:hover{
     background-color: #555555;  
 }
 .botonReceta{
     margin:5px;
 
+}
+@media screen and (max-width:730px){
+    h2{
+        font-size: 10px;
+    }
+    .input{
+        width: 50px;
+    }
+    #contenedorIngredientes{
+        width: 100%;
+      }
+      .contenedorForm{
+        flex-wrap: wrap;
+      }
+    
 }
