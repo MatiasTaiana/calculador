@@ -104,7 +104,7 @@ function borrarReceta(index = 1) {
 }
 async function cotizarEnDolares(index = 1) {
     try {
-        const response = await fetch("https://dolasrapi.com/v1/dolares/blue");
+        const response = await fetch("https://dolarapi.com/v1/dolares/blue");
         if (!response.ok) {
             throw new Error('Error al obtener el valor del dólar.');
         }

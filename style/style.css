@@ -62,6 +62,7 @@ h1{
 }
 .inputNumero:not(:in-range){
     border-color: red;
+    border-radius: 5px;
 }
 .contenedorBotones{
     width: 100%;
